@@ -8,6 +8,7 @@ package server;
 /**
  * Klasse Termin
  * @author timeyer
+ * niroshan
  */
 public class Termin { 
     

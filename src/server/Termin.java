@@ -6,16 +6,12 @@
 package server;
 
 /**
- * Klasse Termin
- * @author timeyer
- * niroshan ist doof
+ * 
+ * @author Tim Meyer
  */
-
 public class Termin {   
     
-    /** ichh */
     
-
 }
 
 

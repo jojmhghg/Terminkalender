@@ -11,4 +11,7 @@ package server;
  */
 public class Termin {
     
+    
+    
+    
 }

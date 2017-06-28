@@ -11,5 +11,7 @@ package server;
  * niroshan
  */
 public class Termin { 
-    
+    public static void main{
+
+}
 }

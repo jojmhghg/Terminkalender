@@ -12,7 +12,7 @@ public class Datum {
     private int monat;
     private int jahr;
     
-    Datum(int tag, int monat, int jahr) throws DatumException, Exception{
+    Datum(int tag, int monat, int jahr) throws DatumException{
         if(monat > 12 || monat < 1){
             throw new DatumException("Monat " + monat + " existiert nicht!");
         }
@@ -77,8 +77,8 @@ public class Datum {
 
         private final String message;
         
-        public DatumException(String meldung) {
-            message = meldung;
+        public DatumException(String message) {
+            this.message = message;
         }
         
         @Override

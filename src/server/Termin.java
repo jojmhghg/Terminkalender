@@ -13,7 +13,8 @@ package server;
 
 public class Termin {   
     
-    
+    /** ichh */
 
 }
+
 

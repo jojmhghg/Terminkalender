@@ -11,6 +11,9 @@ package server;
  * niroshan ist doof
  */
 
-public class Termin {    
+public class Termin {   
+    
+    
 
 }
+

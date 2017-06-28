@@ -10,8 +10,7 @@ package server;
  * @author timeyer
  * niroshan
  */
-public class Termin { 
-    public static void main{
 
-}
+public class Termin {    
+
 }

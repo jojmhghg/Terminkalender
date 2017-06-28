@@ -6,9 +6,9 @@
 package server;
 
 /**
- *
+ * Klasse Termin
  * @author timeyer
  */
-public class Termin {
+public class Termin { 
     
 }

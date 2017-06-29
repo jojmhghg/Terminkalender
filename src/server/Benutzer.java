@@ -82,6 +82,15 @@ public class Benutzer {
     }
     
     /**
+     * fügt Terminkalender einen Termin hinzu
+     * 
+     * @param termin 
+     */
+    public void addTermin(Termin termin){
+        terminkalender.addTermin(termin);
+    }
+    
+    /**
      * Testet ob als Argument übergebener Benutzername bereits existiert
      * 
      * @param username
@@ -92,23 +101,6 @@ public class Benutzer {
         //TODO: impl. einer Funktion um zu schauen ob username schon existiert
         
         return false;
-    }
-
-    /**
-     * Exception-Klasse für Klasse Benutzer
-     */
-    private static class BenutzerException extends Exception {
-
-        private final String message;
-        
-        public BenutzerException(String message) {
-            this.message = message;
-        }
-        
-        @Override
-        public String getMessage(){
-            return message;
-        }
     }
     
 }

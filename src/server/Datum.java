@@ -46,6 +46,65 @@ public class Datum {
     public int getJahr(){
         return jahr;
     }
+    /**
+     * gibt die Kalenderwoche des Datums zurück
+     * 
+     * @return 
+     */
+    public int getKalenderwoche(){
+        int kalenderwoche = 0;
+        
+        int wochentag = getWochentag();
+        int x = getTagDesJahres() + 4 - wochentag;
+        while(x > 0){
+            x -= 7;
+            kalenderwoche++;
+        }
+
+        
+        return kalenderwoche;
+    }
+    /**
+     * Gibt zurück der wievielte Tag des Jahres an dem Datum ist
+     * 
+     * @return 
+     */
+    public int getTagDesJahres(){
+        int tagDesJahres;
+        
+        tagDesJahres = (monat - 1) * 31;
+        if((monat - 1) % 2 == 0 && monat > 1){
+            tagDesJahres -= (monat - 1) / 2;
+        }
+        else{
+            tagDesJahres -= (monat - 2) / 2;
+        }
+        if(istSchaltjahr(jahr) && (monat - 1) >= 2){
+            tagDesJahres -= 1;
+        }
+        if(!istSchaltjahr(jahr) && (monat - 1) >= 2){
+            tagDesJahres -= 2;
+        }
+        tagDesJahres += tag;
+        
+        return tagDesJahres;
+    }
+    /**
+     * gibt Wochentag als Zahl (1-7) des Datums zurück
+     * 
+     * @return 
+     */
+    public int getWochentag(){
+        int wochentag;
+        
+        int f = (14 - monat) / 12;
+        int y = jahr - f;
+        int m = monat + 12 * f - 2;
+        wochentag = (tag + y + 31 * m / 12 + y / 4 - y / 100 + y / 400) % 7;
+        
+        return wochentag;
+    }
+    
     
     /**
      * testet ob übergebener Tag im Monat 'monat' und Jahr 'jahr' existiert

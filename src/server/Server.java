@@ -15,7 +15,12 @@ public class Server {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-          
+        try {
+            Datum test = new Datum(29, Monat.Juni, 2017);
+            System.out.println(test.getKalenderwoche());
+        } catch (Datum.DatumException e) {
+            System.err.println(e.getMessage());
+        }
     }      
     
 }

@@ -11,29 +11,62 @@ package server;
  */
 public class Termin {   
     
-    Datum datum;
-    Zeit beginn;
-    Zeit ende;
-    String titel;
-    String notiz;
-    String ort;
-    //User[] teilnehmer;
+    private Datum datum;
+    private Zeit beginn;
+    private Zeit ende;
+    private String titel;
+    private String notiz;
+    private String ort;
+    //TODO: private User[] teilnehmer;
       
     Termin(Datum datum, Zeit beginn, Zeit ende, String titel){
         this.datum = datum;
         this.beginn = beginn;
         this.ende = ende;
         this.titel = titel;
+        this.notiz = "";
+        this.ort = "";
     }
     
+    //Getter 
+    public Datum getDatum(){
+        return datum;
+    }
+    public Zeit getBeginn(){
+        return beginn;
+    }
+    public Zeit getEnde(){
+        return ende;
+    }
+    public String getTitel(){
+        return titel;
+    }
+    public String getNotiz(){
+        return notiz;
+    }
+    public String getOrt(){
+        return ort;
+    }
+    
+    // Setter
     public void setNotiz(String notiz){
         this.notiz = notiz;
-    }
-    
+    }   
     public void setOrt(String ort){
         this.ort = ort;
     }
-    
+    public void setTitel(String neuerTitel){
+        titel = neuerTitel;
+    }
+    public void setBeginn(Zeit neuerBeginn){
+        beginn = neuerBeginn;
+    }
+    public void setEnde(Zeit neuesEnde){
+        ende = neuesEnde;
+    }
+    public void setDatum(Datum neuesDatum){
+        datum = neuesDatum;
+    }
 }
 
 

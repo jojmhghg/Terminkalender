@@ -10,8 +10,8 @@ package server;
  * @author Tim Meyer
  */
 public class Zeit {
-    int stunde;
-    int minute;
+    private int stunde;
+    private int minute;
     
     Zeit(int stunde, int minute) throws ZeitException{
         if(stunde > 23 || stunde < 0){
@@ -25,6 +25,32 @@ public class Zeit {
         this.minute = minute;
     }
 
+    //Setter:
+    private void setStunde(int stunde) throws ZeitException{
+        if(stunde > 23 || stunde < 0){
+            throw new ZeitException("Stunde zwischen 0 und 23 wählen");
+        }
+        this.stunde = stunde;
+    }
+    private void setMinute(int minute) throws ZeitException{
+        if(minute > 59 || minute < 0){
+            throw new ZeitException("Minute zwischen 0 und 59 wählen");
+        }
+        this.minute = minute;
+    }
+    
+    //Getter:
+    private int getStunde(){
+        return stunde;
+    }
+    private int getMinute(){
+        return minute;
+    }
+    
+    
+    /**
+     * Exception-Klasse für Klasse Zeit
+     */
     private static class ZeitException extends Exception {
         
         String message;

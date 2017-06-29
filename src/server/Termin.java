@@ -24,8 +24,31 @@ public class Termin {
         this.beginn = beginn;
         this.ende = ende;
         this.titel = titel;
+        this.notiz = "";
+        this.ort = "";
     }
     
+    //Getter 
+    public Datum getDatum(){
+        return datum;
+    }
+    public Zeit getBeginn(){
+        return beginn;
+    }
+    public Zeit getEnde(){
+        return ende;
+    }
+    public String getTitel(){
+        return titel;
+    }
+    public String getNotiz(){
+        return notiz;
+    }
+    public String getOrt(){
+        return ort;
+    }
+    
+    // Setter
     public void setNotiz(String notiz){
         this.notiz = notiz;
     }

@@ -9,7 +9,13 @@ package server;
  *
  * @author Tim Meyer
  */
-public class Terminkalender {
-
-
+public class Server {
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+          
+    }      
+    
 }

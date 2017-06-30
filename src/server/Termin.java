@@ -1,9 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * TODO: Methoden zum bearbeiten sind mit TODO markiert
+ *          
+ * 
  */
 package server;
+
+import java.util.LinkedList;
 
 /**
  * 
@@ -17,15 +19,40 @@ public class Termin {
     private String titel;
     private String notiz;
     private String ort;
-    //TODO: private User[] teilnehmer;
+    private LinkedList<String>teilnehmer;
       
-    Termin(Datum datum, Zeit beginn, Zeit ende, String titel){
+    Termin(Datum datum, Zeit beginn, Zeit ende, String titel) throws TerminException{
+        if(!anfangVorEnde(beginn, ende)){
+            throw new TerminException("Startzeitpunkt darf nicht nach dem Endzeitpunkt liegen!");
+        }
+        
         this.datum = datum;
         this.beginn = beginn;
         this.ende = ende;
         this.titel = titel;
         this.notiz = "";
         this.ort = "";
+        this.teilnehmer = new LinkedList<>();
+    }
+    
+    /**
+     * TODO
+     * 
+     * @param username
+     * @return 
+     */
+    public boolean istTeilnehmer(String username){
+        //TODO: testen ob username in teilnehmer vorkommt, wenn ja return true, sonst false    
+        return false;
+    }
+    
+    /**
+     * fügt der Teilnehmerliste 'teilnehmer' den Teilnehmer 'usename' hinzu
+     * 
+     * @param username 
+     */
+    public void addTeilnehmer(String username){
+        teilnehmer.add(username);
     }
     
     //Getter 
@@ -47,6 +74,9 @@ public class Termin {
     public String getOrt(){
         return ort;
     }
+    public LinkedList<String> getTeilnehmerliste(){
+        return teilnehmer;
+    }
     
     // Setter
     public void setNotiz(String notiz){
@@ -58,15 +88,32 @@ public class Termin {
     public void setTitel(String neuerTitel){
         titel = neuerTitel;
     }
-    public void setBeginn(Zeit neuerBeginn){
+    public void setBeginn(Zeit neuerBeginn) throws TerminException{
+        if(!anfangVorEnde(neuerBeginn, ende)){
+            throw new TerminException("Startzeitpunkt darf nicht nach dem Endzeitpunkt liegen!");
+        }
         beginn = neuerBeginn;
     }
-    public void setEnde(Zeit neuesEnde){
+    public void setEnde(Zeit neuesEnde) throws TerminException{
+        if(!anfangVorEnde(beginn, neuesEnde)){
+            throw new TerminException("Startzeitpunkt darf nicht nach dem Endzeitpunkt liegen!");
+        }
         ende = neuesEnde;
     }
     public void setDatum(Datum neuesDatum){
         datum = neuesDatum;
     }
+
+    /**
+     * TODO
+     * 
+     * @return 
+     */
+    private boolean anfangVorEnde(Zeit beginn, Zeit ende){
+        //TODO: impl. Funktion die testet ob beginng vor ende ist, dann return true, sonst false
+        return true;
+    }
+    
 }
 
 

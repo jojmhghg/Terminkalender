@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * TODO: hier sollten wir erst nocheinmal drüber reden!
+ * 
+ * 
  */
 package server;
 
@@ -19,12 +19,32 @@ public class Terminkalender {
         terminkalender = new LinkedList<>();
     }
     
+    
+    
+    /**
+     * TODO
+     * 
+     * @param datum
+     * @param beginn
+     * @param ende
+     * @param titel
+     * @return 
+     */
+    public Termin getTermin(Datum datum, Zeit beginn, Zeit ende, String titel){
+        /*TODO: suche in terminkalender nach dem Termin und gebe ihn dann zurück */ 
+        return terminkalender.getFirst(); //muss angepasst werden
+    }
+    
     /**
      * fügt dem Terminkalender einen Termin hinzu
      * 
      * @param termin 
+     * @throws server.TerminException 
      */
-    public void addTermin(Termin termin){
+    public void addTermin(Termin termin) throws TerminException{
+        if(terminBereitsVorhanden(termin)){
+            throw new TerminException("Termin existiert bereits!");
+        }
         terminkalender.add(termin);
     }
     
@@ -33,13 +53,14 @@ public class Terminkalender {
      * 
      * @param monat
      * @return 
+     * @throws server.TerminException 
      */
-    public LinkedList<Termin> getTermineImMonat(Monat monat){
-        LinkedList<Termin> monatsauszug = new LinkedList<>();
+    public Terminkalender getTermineImMonat(Monat monat) throws TerminException{
+        Terminkalender monatsauszug = new Terminkalender();
         
         for(Termin termin : terminkalender){
             if(termin.getDatum().getMonat() == monat.getWert()){
-                monatsauszug.add(termin);
+                monatsauszug.addTermin(termin);
             }
         }
         
@@ -51,16 +72,29 @@ public class Terminkalender {
      * 
      * @param kalenderwoche
      * @return 
+     * @throws server.TerminException 
      */
-    public LinkedList<Termin> getTermineInWoche(int kalenderwoche){
-        LinkedList<Termin> wochenauszug = new LinkedList<>();
+    public Terminkalender getTermineInWoche(int kalenderwoche) throws TerminException{
+        Terminkalender wochenauszug = new Terminkalender();
         
         for(Termin termin : terminkalender){
             if(termin.getDatum().getKalenderwoche() == kalenderwoche){
-                wochenauszug.add(termin);
+                wochenauszug.addTermin(termin);
             }
         }
         
         return wochenauszug;
+    }
+
+    /**
+     * TODO
+     * 
+     * @param termin
+     * @return 
+     */
+    private boolean terminBereitsVorhanden(Termin termin){
+        /*TODO: teste für alle Elemente von 'terminkalender' ob datum, beginn, 
+                ende und titel gleich wie bei 'termin' sind, wenn ja return true */
+        return false;
     }
 }

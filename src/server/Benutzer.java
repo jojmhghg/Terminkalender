@@ -1,9 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * TODO: alles mit todo markiert + Metoden für getTermineImMonat & getTermineInWoche
+ * implementieren
+ * 
  */
 package server;
+
+import java.util.LinkedList;
 
 /**
  *
@@ -17,9 +19,9 @@ public class Benutzer {
     private String email;
     private String passwort;
     private Terminkalender terminkalender;
-    //Liste für offene Anfragen
-    //Kontaktliste
-    //Meldungen
+    //TODO Liste für offene Anfragen
+    private LinkedList<String> Kontaktliste; 
+    //TODO Meldungen
     
     /**
      * Konstruktor der Klasse Benutzer
@@ -45,7 +47,7 @@ public class Benutzer {
         this.vorname = "";
         this.email = "";
         this.terminkalender = new Terminkalender();
-    }
+    } 
     
     //Getter:
     public String getUsername(){
@@ -85,8 +87,9 @@ public class Benutzer {
      * fügt Terminkalender einen Termin hinzu
      * 
      * @param termin 
+     * @throws server.TerminException 
      */
-    public void addTermin(Termin termin){
+    public void addTermin(Termin termin) throws TerminException{
         terminkalender.addTermin(termin);
     }
     

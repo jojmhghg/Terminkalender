@@ -92,18 +92,5 @@ public class Benutzer {
     public void addTermin(Termin termin) throws TerminException{
         terminkalender.addTermin(termin);
     }
-    
-    /**
-     * Testet ob als Argument übergebener Benutzername bereits existiert
-     * 
-     * @param username
-     * @return 
-     */
-    private boolean usernameAlreadyUsed(String username) {
-        
-        //TODO: impl. einer Funktion um zu schauen ob username schon existiert
-        
-        return false;
-    }
-    
-}
+  
+} 

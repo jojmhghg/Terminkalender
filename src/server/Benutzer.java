@@ -95,7 +95,7 @@ public class Benutzer {
     
     /**
      * Testet ob als Argument übergebener Benutzername bereits existiert
-     * 
+     * Edwrard
      * @param username
      * @return 
      */

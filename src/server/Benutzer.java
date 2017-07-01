@@ -22,6 +22,7 @@ public class Benutzer {
     //TODO Liste für offene Anfragen
     private LinkedList<String> Kontaktliste; 
     //TODO Meldungen
+    private BenutzerListe benutzerliste;
     
     /**
      * Konstruktor der Klasse Benutzer
@@ -95,15 +96,18 @@ public class Benutzer {
     
     /**
      * Testet ob als Argument übergebener Benutzername bereits existiert
-     * Edwrard
+     * 
      * @param username
      * @return 
      */
     private boolean usernameAlreadyUsed(String username) {
         
         //TODO: impl. einer Funktion um zu schauen ob username schon existiert
-        
-        return false;
+        if(benutzerliste.contains(username)){
+            return true;
+        }
+        else 
+            return false;
     }
     
 }

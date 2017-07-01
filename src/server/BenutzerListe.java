@@ -54,4 +54,12 @@ public class BenutzerListe {
         //TODO: impl. Funktion um aus einer Datei die Liste zu füllen
     }
     
+    /**
+     * Hilfsmethode für die methode usernameAlreadyUsed
+     * 
+     */
+    boolean contains(String username) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

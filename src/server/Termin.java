@@ -36,14 +36,19 @@ public class Termin {
     }
     
     /**
-     * TODO
+     * Methode istTeilnehmer
+     * Testet ob als Argument übergebener username in teilnehmer vorkommt
      * 
      * @param username
      * @return 
      */
     public boolean istTeilnehmer(String username){
-        //TODO: testen ob username in teilnehmer vorkommt, wenn ja return true, sonst false    
-        return false;
+        //TODO: testen ob username in teilnehmer vorkommt, wenn ja return true, sonst false 
+        if(teilnehmer.contains(username)){
+            return true;
+        }
+        else 
+            return false;
     }
     
     /**

@@ -22,7 +22,6 @@ public class Benutzer {
     //TODO Liste für offene Anfragen
     private LinkedList<String> Kontaktliste; 
     //TODO Meldungen
-    private BenutzerListe benutzerliste;
     
     /**
      * Konstruktor der Klasse Benutzer
@@ -93,21 +92,9 @@ public class Benutzer {
     public void addTermin(Termin termin) throws TerminException{
         terminkalender.addTermin(termin);
     }
-    
-    /**
-     * Testet ob als Argument übergebener Benutzername bereits existiert
-     * 
-     * @param username
-     * @return 
-     */
+
     private boolean usernameAlreadyUsed(String username) {
-        
-        //TODO: impl. einer Funktion um zu schauen ob username schon existiert
-        if(benutzerliste.contains(username)){
-            return true;
-        }
-        else 
-            return false;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

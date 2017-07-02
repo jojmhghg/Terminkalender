@@ -23,9 +23,13 @@ public class BenutzerListe {
      * fügt der Benutzerliste einen Benutzer hinzu
      * 
      * @param benutzer 
+     * @throws server.BenutzerListeException 
      */
-    public void addBenutzer(Benutzer benutzer){
+    public void addBenutzer(Benutzer benutzer) throws BenutzerListeException{
         benutzerliste.add(benutzer);
+        if(benutzerliste.contains(benutzer)){
+            throw new BenutzerListeException("Benutzer" + benutzer + "existiert schon in der Liste");
+        }
         //TODO: Benutzer auf Datei schreiben um ihn so zu speichern!
     }
     
@@ -52,6 +56,22 @@ public class BenutzerListe {
      */
     public void fillBenutzerliste(){
         //TODO: impl. Funktion um aus einer Datei die Liste zu füllen
+    }
+    
+    /**
+     * Testet ob als Argument übergebener username bereits existiert
+     * 
+     * @param username
+     * @return 
+     */
+    public boolean usernameAlreadyUsed(String username) {
+        
+        //TODO: impl. einer Funktion um zu schauen ob username schon existiert
+        if(benutzerliste.contains(username)){
+            return true;
+        }
+        else 
+            return false;
     }
     
 }

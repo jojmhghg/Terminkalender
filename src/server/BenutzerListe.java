@@ -23,8 +23,12 @@ public class BenutzerListe {
      * fügt der Benutzerliste einen Benutzer hinzu
      * 
      * @param benutzer 
+     * @throws server.BenutzerException 
      */
-    public void addBenutzer(Benutzer benutzer){
+    public void addBenutzer(Benutzer benutzer) throws BenutzerException{
+        if(benutzerliste.contains(benutzer.getUsername())){
+            throw new BenutzerException("Benutzername existiert bereits");
+        }
         benutzerliste.add(benutzer);
         //TODO: Benutzer auf Datei schreiben um ihn so zu speichern!
     }

@@ -31,9 +31,6 @@ public class Benutzer {
      * @throws server.Benutzer.BenutzerException 
      */
     Benutzer(String username, String passwort) throws BenutzerException{
-        if(usernameAlreadyUsed(username)){
-            throw new BenutzerException("Username '" + username + "' existiert bereits!");
-        }
         if(username.length() < 4 || username.length() > 12){
             throw new BenutzerException("Der Username sollte zwischen 4 und 12 Zeichen lang sein");
         }
@@ -92,18 +89,5 @@ public class Benutzer {
     public void addTermin(Termin termin) throws TerminException{
         terminkalender.addTermin(termin);
     }
-    
-    /**
-     * Testet ob als Argument übergebener Benutzername bereits existiert
-     * 
-     * @param username
-     * @return 
-     */
-    private boolean usernameAlreadyUsed(String username) {
-        
-        //TODO: impl. einer Funktion um zu schauen ob username schon existiert
-        
-        return false;
-    }
-    
+       
 }

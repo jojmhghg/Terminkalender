@@ -5,6 +5,8 @@
  */
 package server;
 
+import server.hilfsklassen.Zeit;
+import server.hilfsklassen.Datum;
 import java.util.LinkedList;
 
 /**
@@ -13,19 +15,21 @@ import java.util.LinkedList;
  */
 public class Termin {   
     
+    private final int id;
     private Datum datum;
     private Zeit beginn;
     private Zeit ende;
     private String titel;
     private String notiz;
     private String ort;
-    private LinkedList<String>teilnehmer;
+    private LinkedList<Teilnehmer>teilnehmer;
       
-    Termin(Datum datum, Zeit beginn, Zeit ende, String titel) throws TerminException{
+    Termin(Datum datum, Zeit beginn, Zeit ende, String titel, int id) throws TerminException{
         if(!anfangVorEnde(beginn, ende)){
             throw new TerminException("Startzeitpunkt darf nicht nach dem Endzeitpunkt liegen!");
         }
         
+        this.id = id;
         this.datum = datum;
         this.beginn = beginn;
         this.ende = ende;
@@ -34,28 +38,21 @@ public class Termin {
         this.ort = "";
         this.teilnehmer = new LinkedList<>();
     }
-    
-    /**
-     * TODO
-     * 
-     * @param username
-     * @return 
-     */
-    public boolean istTeilnehmer(String username){
-        //TODO: testen ob username in teilnehmer vorkommt, wenn ja return true, sonst false    
-        return false;
-    }
-    
+       
     /**
      * fügt der Teilnehmerliste 'teilnehmer' den Teilnehmer 'usename' hinzu
      * 
      * @param username 
      */
     public void addTeilnehmer(String username){
-        teilnehmer.add(username);
+        //TODO: teste ob username in teilnehmerliste enthalten, wenn ja: werfe Fehler
+        teilnehmer.add(new Teilnehmer(username));
     }
     
     //Getter 
+    public int getID(){
+        return id;
+    }
     public Datum getDatum(){
         return datum;
     }
@@ -74,7 +71,7 @@ public class Termin {
     public String getOrt(){
         return ort;
     }
-    public LinkedList<String> getTeilnehmerliste(){
+    public final LinkedList<Teilnehmer> getTeilnehmerliste(){
         return teilnehmer;
     }
     
@@ -103,10 +100,11 @@ public class Termin {
     public void setDatum(Datum neuesDatum){
         datum = neuesDatum;
     }
-
+    
     /**
-     * TODO
      * 
+     * @param beginn
+     * @param ende
      * @return 
      */
     private boolean anfangVorEnde(Zeit beginn, Zeit ende){

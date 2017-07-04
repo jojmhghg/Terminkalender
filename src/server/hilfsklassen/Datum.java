@@ -3,7 +3,7 @@
  *
  *
  */
-package server;
+package server.hilfsklassen;
 
 /**
  *
@@ -14,7 +14,7 @@ public class Datum {
     private int monat;
     private int jahr;
     
-    Datum(int tag, Monat monat, int jahr) throws DatumException{
+    public Datum(int tag, Monat monat, int jahr) throws DatumException{
 
         if(!existiertTagInMonat(tag, monat.getWert(), jahr)){
             throw new DatumException("Monat " + monat + " hat keinen Tag " + tag);

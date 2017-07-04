@@ -5,6 +5,9 @@
  */
 package server;
 
+import server.hilfsklassen.Monat;
+import server.hilfsklassen.Datum;
+
 /**
  *
  * @author Tim Meyer

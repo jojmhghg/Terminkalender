@@ -54,4 +54,16 @@ public class BenutzerListe {
         //TODO: impl. Funktion um aus einer Datei die Liste zu füllen
     }
     
+      
+    /**
+     * Testet ob als Argument übergebener Benutzername bereits existiert
+     * 
+     * @param username
+     * @return 
+     */
+     private boolean usernameAlreadyUsed(String username){
+         try{
+            return username.equals(getBenutzer(username).getUsername());
+         }catch (BenutzerException e){return false;}
+    }
 }

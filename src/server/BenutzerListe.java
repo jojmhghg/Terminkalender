@@ -32,6 +32,9 @@ public class BenutzerListe {
      */
     public void addBenutzer(String username, String passwort, String email) throws BenutzerException{
         //TODO: teste ob username in benutzerliste vorhanden ist, wenn ja: werfe Fehler
+        if(usernameAlreadyUsed(username)){
+            throw new BenutzerException("Username" +username+ "existiert bereits!");
+        }
         //TODO: teste ob email in benutzerliste vorhanden ist, wenn ja: werfe Fehler
         benutzerliste.add(new Benutzer(username, passwort, email));
     }
@@ -73,11 +76,11 @@ public class BenutzerListe {
     public boolean usernameAlreadyUsed(String username) {
         
         //TODO: impl. einer Funktion um zu schauen ob username schon existiert
-        if(benutzerliste.contains(username)){
-            return true;
-        }
-        else 
+        try{
+            return username.equals(getBenutzer(username).getUsername());
+        }catch (BenutzerException e){
             return false;
+        }
     }
     
 }

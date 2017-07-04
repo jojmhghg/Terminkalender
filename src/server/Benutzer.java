@@ -123,3 +123,9 @@ public class Benutzer {
         kontaktliste.remove(username);
     }
 }
+
+    private boolean usernameAlreadyUsed(String username) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+}

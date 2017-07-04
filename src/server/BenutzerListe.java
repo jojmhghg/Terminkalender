@@ -64,4 +64,20 @@ public class BenutzerListe {
         return eingeloggterBenutzer;
     }
     
+    /**
+     * Testet ob als Argument übergebener username bereits existiert
+     * 
+     * @param username
+     * @return 
+     */
+    public boolean usernameAlreadyUsed(String username) {
+        
+        //TODO: impl. einer Funktion um zu schauen ob username schon existiert
+        if(benutzerliste.contains(username)){
+            return true;
+        }
+        else 
+            return false;
+    }
+    
 }

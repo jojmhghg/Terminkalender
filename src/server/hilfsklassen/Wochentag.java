@@ -3,7 +3,7 @@
  * 
  * 
  */
-package server;
+package server.hilfsklassen;
 
 /**
  *

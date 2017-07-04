@@ -5,6 +5,9 @@
  */
 package server;
 
+import server.hilfsklassen.Zeit;
+import server.hilfsklassen.Monat;
+import server.hilfsklassen.Datum;
 import java.util.LinkedList;
 
 /**
@@ -14,9 +17,11 @@ import java.util.LinkedList;
 public class Terminkalender {
 
     private final LinkedList<Termin> terminkalender;
+    private int idCounter;
     
     Terminkalender(){
         terminkalender = new LinkedList<>();
+        idCounter = 1;
     }
     
     

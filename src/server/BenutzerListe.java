@@ -14,23 +14,26 @@ import java.util.LinkedList;
 public class BenutzerListe {
     
     private final LinkedList<Benutzer> benutzerliste;
+    private Benutzer eingeloggterBenutzer;
+    private boolean eingeloggt;
     
     BenutzerListe(){
         benutzerliste = new LinkedList<>();
+        eingeloggt = false;
     }
     
     /**
      * fügt der Benutzerliste einen Benutzer hinzu
      * 
-     * @param benutzer 
-     * @throws server.BenutzerListeException 
+     * @param username
+     * @param passwort
+     * @param email
+     * @throws server.BenutzerException 
      */
-    public void addBenutzer(Benutzer benutzer) throws BenutzerListeException{
-        benutzerliste.add(benutzer);
-        if(benutzerliste.contains(benutzer)){
-            throw new BenutzerListeException("Benutzer" + benutzer + "existiert schon in der Liste");
-        }
-        //TODO: Benutzer auf Datei schreiben um ihn so zu speichern!
+    public void addBenutzer(String username, String passwort, String email) throws BenutzerException{
+        //TODO: teste ob username in benutzerliste vorhanden ist, wenn ja: werfe Fehler
+        //TODO: teste ob email in benutzerliste vorhanden ist, wenn ja: werfe Fehler
+        benutzerliste.add(new Benutzer(username, passwort, email));
     }
     
     /**
@@ -38,24 +41,27 @@ public class BenutzerListe {
      * dieser nicht vorhanden ist
      * 
      * @param username
-     * @return
+     * @param passwort
      * @throws BenutzerException 
      */
-    public Benutzer getBenutzer(String username) throws BenutzerException{
-        for(Benutzer user : benutzerliste){
-            if(username.equals(user.getUsername())){
-                return user;
-            }
-        }
-        throw new BenutzerException("Benutzer '" + username + "' existiert nicht!");
+    public void einloggen(String username, String passwort) throws BenutzerException{
+        Benutzer gesuchterBenutzer = null; /* sobald TODO's implementiert: '= null' entfernen */
+        //TODO: teste ob username in benutzerliste, wenn nein: werfe Fehler, wenn ja: gesuchterBenutzer = gefundener Benutzer aus der Liste
+        //TODO: teste ob passwort mit dem passwort des benutzers aus der Liste übereinstimmt, wenn nein: werfe Fehler
+        eingeloggterBenutzer = gesuchterBenutzer;
+        eingeloggt = true;
     }
     
     /**
-     * füllt Benutzerliste mithilfe einer Datei welche die notwendigen Daten enthält
      * 
+     * @return
+     * @throws BenutzerException 
      */
-    public void fillBenutzerliste(){
-        //TODO: impl. Funktion um aus einer Datei die Liste zu füllen
+    public Benutzer getEingeloggterBenutzer() throws BenutzerException{
+        if(!eingeloggt){
+            throw new BenutzerException("noch nicht eingeloggt");
+        }
+        return eingeloggterBenutzer;
     }
     
     /**

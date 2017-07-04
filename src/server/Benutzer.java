@@ -19,21 +19,18 @@ public class Benutzer {
     private String email;
     private String passwort;
     private Terminkalender terminkalender;
-    //TODO Liste für offene Anfragen
-    private LinkedList<String> Kontaktliste; 
-    //TODO Meldungen
+    private LinkedList<Anfrage> terminanfragen;
+    private LinkedList<String> kontaktliste; 
+    private LinkedList<String> meldungen;
     
     /**
-     * Konstruktor der Klasse Benutzer
      * 
      * @param username
      * @param passwort
-     * @throws server.Benutzer.BenutzerException 
+     * @param email
+     * @throws BenutzerException 
      */
-    Benutzer(String username, String passwort) throws BenutzerException{
-        if(usernameAlreadyUsed(username)){
-            throw new BenutzerException("Username '" + username + "' existiert bereits!");
-        }
+    Benutzer(String username, String passwort, String email) throws BenutzerException{
         if(username.length() < 4 || username.length() > 12){
             throw new BenutzerException("Der Username sollte zwischen 4 und 12 Zeichen lang sein");
         }
@@ -41,12 +38,15 @@ public class Benutzer {
             throw new BenutzerException("Das Passwort sollte zwischen 4 und 12 Zeichen lang sein");
         }
         
+        this.email = email;
         this.username = username;
         this.passwort = passwort;
         this.nachname = "";
         this.vorname = "";
-        this.email = "";
         this.terminkalender = new Terminkalender();
+        this.kontaktliste = new LinkedList<>();
+        this.meldungen = new LinkedList<>();
+        this.terminanfragen = new LinkedList<>();
     } 
     
     //Getter:
@@ -64,6 +64,18 @@ public class Benutzer {
     }
     public String getEmail(){
         return email;
+    } 
+    public Terminkalender getTerminkalender(){
+        return terminkalender;
+    }
+    public final LinkedList<String> getKontaktliste(){
+        return kontaktliste;
+    }
+    public LinkedList<String> getMeldungen(){
+        return meldungen;
+    }
+    public LinkedList<Anfrage> getTerminanfragen(){
+        return terminanfragen;
     }
     
     //Setter:
@@ -82,16 +94,35 @@ public class Benutzer {
         }
         this.passwort = neuesPasswort;
     }
+       
+    /**
+     * 
+     * @param passwort
+     * @return 
+     */
+    public boolean istPasswort(String passwort){
+        return (this.passwort.equals(passwort));
+    }
     
     /**
-     * fügt Terminkalender einen Termin hinzu
      * 
-     * @param termin 
-     * @throws server.TerminException 
+     * @param username 
      */
-    public void addTermin(Termin termin) throws TerminException{
-        terminkalender.addTermin(termin);
+    public void addKontakt(String username){
+        //TODO: teste ob username existiert, wenn nein: werfe Fehler
+        //TODO: teste ob username bereits in kontaktliste, wenn ja: werfe Fehler
+        kontaktliste.add(username);
     }
+    
+    /**
+     * 
+     * @param username 
+     */
+    public void removeKontakt(String username){
+        //TODO: teste ob username in kontaktliste, wenn nein: werfe Fehler
+        kontaktliste.remove(username);
+    }
+}
 
     private boolean usernameAlreadyUsed(String username) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

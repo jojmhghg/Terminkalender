@@ -124,8 +124,8 @@ public class Benutzer {
     }
 }
 
-    private boolean usernameAlreadyUsed(String username) {
+    /*private boolean usernameAlreadyUsed(String username) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }*/
     
-}
+

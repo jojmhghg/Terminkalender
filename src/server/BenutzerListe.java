@@ -14,12 +14,9 @@ import java.util.LinkedList;
 public class BenutzerListe {
     
     private final LinkedList<Benutzer> benutzerliste;
-    private Benutzer eingeloggterBenutzer;
-    private boolean eingeloggt;
     
     BenutzerListe(){
         benutzerliste = new LinkedList<>();
-        eingeloggt = false;
     }
     
     /**
@@ -34,34 +31,6 @@ public class BenutzerListe {
         //TODO: teste ob username in benutzerliste vorhanden ist, wenn ja: werfe Fehler
         //TODO: teste ob email in benutzerliste vorhanden ist, wenn ja: werfe Fehler
         benutzerliste.add(new Benutzer(username, passwort, email));
-    }
-    
-    /**
-     * gibt Benutzer zu übergebenen username zurück oder wirft Fehler falls
-     * dieser nicht vorhanden ist
-     * 
-     * @param username
-     * @param passwort
-     * @throws BenutzerException 
-     */
-    public void einloggen(String username, String passwort) throws BenutzerException{
-        Benutzer gesuchterBenutzer = null; /* sobald TODO's implementiert: '= null' entfernen */
-        //TODO: teste ob username in benutzerliste, wenn nein: werfe Fehler, wenn ja: gesuchterBenutzer = gefundener Benutzer aus der Liste
-        //TODO: teste ob passwort mit dem passwort des benutzers aus der Liste übereinstimmt, wenn nein: werfe Fehler
-        eingeloggterBenutzer = gesuchterBenutzer;
-        eingeloggt = true;
-    }
-    
-    /**
-     * 
-     * @return
-     * @throws BenutzerException 
-     */
-    public Benutzer getEingeloggterBenutzer() throws BenutzerException{
-        if(!eingeloggt){
-            throw new BenutzerException("noch nicht eingeloggt");
-        }
-        return eingeloggterBenutzer;
     }
     
 }

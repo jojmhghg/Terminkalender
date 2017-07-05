@@ -5,8 +5,10 @@
  */
 package server;
 
-import server.hilfsklassen.Datum;
-import server.hilfsklassen.Monat;
+import java.rmi.AlreadyBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.*;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  *
@@ -16,14 +18,19 @@ public class Server {
     
     /**
      * @param args the command line arguments
+     * @throws java.rmi.RemoteException
+     * @throws java.rmi.AlreadyBoundException
      */
-    public static void main(String[] args) {
-        try {
-            Datum test = new Datum(29, Monat.Juni, 2017);
-            System.out.println(test.getKalenderwoche());
-        } catch (Datum.DatumException e) {
-            System.err.println(e.getMessage());
-        }
+    public static void main(String[] args) throws RemoteException, AlreadyBoundException {
+        Launcher launcher = new Launcher();
+        
+        LauncherInterface stub = (LauncherInterface)UnicastRemoteObject.exportObject(launcher, 0);
+
+        Registry registry = LocateRegistry.createRegistry(1099);
+        registry.bind("Terminkalender", stub);
+            
+        System.out.println("Server lÃ¤uft!");
+
     }      
     
 }

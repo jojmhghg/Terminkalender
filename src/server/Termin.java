@@ -1,7 +1,7 @@
 /*
- * TODO: Methoden zum bearbeiten sind mit TODO markiert
- *          
- * 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package server;
 
@@ -111,7 +111,4 @@ public class Termin {
         //TODO: impl. Funktion die testet ob beginng vor ende ist, dann return true, sonst false
         return true;
     }
-    
 }
-
-

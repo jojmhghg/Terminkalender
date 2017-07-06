@@ -38,7 +38,7 @@ public class Termin {
         this.ort = "";
         this.teilnehmer = new LinkedList<>();
     }
-       
+
     /**
      * fügt der Teilnehmerliste 'teilnehmer' den Teilnehmer 'usename' hinzu
      * 

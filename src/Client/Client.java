@@ -32,7 +32,7 @@ public class Client {
             }
             try {
                 Registry registry = LocateRegistry.getRegistry(ip_addr);
-                Interface stub = (Interface) registry.lookup("Benutzer");
+                LauncherInterface stub = (LauncherInterface) registry.lookup("Terminkalender");
                 
                 //TODO: hier die Funktionalität des Clients implementieren!
             } 

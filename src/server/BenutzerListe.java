@@ -14,12 +14,9 @@ import java.util.LinkedList;
 public class BenutzerListe {
     
     private final LinkedList<Benutzer> benutzerliste;
-    private Benutzer eingeloggterBenutzer;
-    private boolean eingeloggt;
     
     BenutzerListe(){
         benutzerliste = new LinkedList<>();
-        eingeloggt = false;
     }
     
     /**
@@ -31,40 +28,22 @@ public class BenutzerListe {
      * @throws server.BenutzerException 
      */
     public void addBenutzer(String username, String passwort, String email) throws BenutzerException{
-        //TODO: teste ob username in benutzerliste vorhanden ist, wenn ja: werfe Fehler
-        if(usernameAlreadyUsed(username)){
-            throw new BenutzerException("Username" +username+ "existiert bereits!");
+        if(existiertBenutzer(username)){
+            //TODO: teste ob username in benutzerliste vorhanden ist, wenn ja: werfe Fehler
         }
         //TODO: teste ob email in benutzerliste vorhanden ist, wenn ja: werfe Fehler
         benutzerliste.add(new Benutzer(username, passwort, email));
     }
     
-    /**
-     * gibt Benutzer zu übergebenen username zurück oder wirft Fehler falls
-     * dieser nicht vorhanden ist
-     * 
-     * @param username
-     * @param passwort
-     * @throws BenutzerException 
-     */
-    public void einloggen(String username, String passwort) throws BenutzerException{
-        Benutzer gesuchterBenutzer = null; /* sobald TODO's implementiert: '= null' entfernen */
-        //TODO: teste ob username in benutzerliste, wenn nein: werfe Fehler, wenn ja: gesuchterBenutzer = gefundener Benutzer aus der Liste
-        //TODO: teste ob passwort mit dem passwort des benutzers aus der Liste übereinstimmt, wenn nein: werfe Fehler
-        eingeloggterBenutzer = gesuchterBenutzer;
-        eingeloggt = true;
-    }
-    
-    /**
-     * 
-     * @return
-     * @throws BenutzerException 
-     */
-    public Benutzer getEingeloggterBenutzer() throws BenutzerException{
-        if(!eingeloggt){
-            throw new BenutzerException("noch nicht eingeloggt");
+    public boolean existiertBenutzer(String username){
+        boolean result = false;
+        for(Benutzer benutzer : benutzerliste){
+            if(benutzer.getUsername().equals(username)){
+                result = true;
+            }
         }
-        return eingeloggterBenutzer;
+        
+        return result;
     }
     
     /**

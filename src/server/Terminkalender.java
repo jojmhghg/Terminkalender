@@ -24,30 +24,38 @@ public class Terminkalender {
         idCounter = 1;
     }
        
+
     /**
-     * TODO
+     * 
+     * @param id
+     * @return 
+     */
+    public Termin getTerminByID(int id){
+        //TODO: suche in terminkalender nach dem Termin mit id = id, falls gefunden gebe ihn zurück, sonst werfe fehler
+        return terminkalender.getFirst(); //muss angepasst werden
+    }
+    
+    /**
      * 
      * @param datum
      * @param beginn
      * @param ende
      * @param titel
-     * @return 
+     * @param username
+     * @throws TerminException 
      */
-    public Termin getTermin(Datum datum, Zeit beginn, Zeit ende, String titel){
-        /*TODO: suche in terminkalender nach dem Termin und gebe ihn dann zurück */ 
-        return terminkalender.getFirst(); //muss angepasst werden
+    public void addTermin(Datum datum, Zeit beginn, Zeit ende, String titel, String username) throws TerminException{
+        terminkalender.add(new Termin(datum, beginn, ende, titel, idCounter));
+        terminkalender.getLast().addTeilnehmer(username);
+        idCounter++;
     }
     
     /**
-     * fügt dem Terminkalender einen Termin hinzu
+     * Hilfsmethode für getTerminImMonat und getTerminInWoche
      * 
      * @param termin 
-     * @throws server.TerminException 
      */
-    public void addTermin(Termin termin) throws TerminException{
-        if(terminBereitsVorhanden(termin)){
-            throw new TerminException("Termin existiert bereits!");
-        }
+    private void addTermin(Termin termin){
         terminkalender.add(termin);
     }
     
@@ -55,14 +63,15 @@ public class Terminkalender {
      * gibt alle Termine im Monat 'monat' in LinkedList zurück
      * 
      * @param monat
+     * @param jahr
      * @return 
      * @throws server.TerminException 
      */
-    public Terminkalender getTermineImMonat(Monat monat) throws TerminException{
+    public Terminkalender getTermineImMonat(Monat monat, int jahr) throws TerminException{
         Terminkalender monatsauszug = new Terminkalender();
         
         for(Termin termin : terminkalender){
-            if(termin.getDatum().getMonat() == monat.getWert()){
+            if(termin.getDatum().getMonat() == monat.getWert() && termin.getDatum().getJahr() == jahr){
                 monatsauszug.addTermin(termin);
             }
         }
@@ -74,14 +83,15 @@ public class Terminkalender {
      * gibt alle Termine der übergebenen Kalenderwoche in LinkedList zurück
      * 
      * @param kalenderwoche
+     * @param jahr
      * @return 
      * @throws server.TerminException 
      */
-    public Terminkalender getTermineInWoche(int kalenderwoche) throws TerminException{
+    public Terminkalender getTermineInWoche(int kalenderwoche, int jahr) throws TerminException{
         Terminkalender wochenauszug = new Terminkalender();
         
         for(Termin termin : terminkalender){
-            if(termin.getDatum().getKalenderwoche() == kalenderwoche){
+            if(termin.getDatum().getKalenderwoche() == kalenderwoche && termin.getDatum().getJahr() == jahr){
                 wochenauszug.addTermin(termin);
             }
         }
@@ -90,14 +100,11 @@ public class Terminkalender {
     }
 
     /**
-     * TODO
      * 
-     * @param termin
-     * @return 
+     * @param id 
      */
-    private boolean terminBereitsVorhanden(Termin termin){
-        /*TODO: teste für alle Elemente von 'terminkalender' ob datum, beginn, 
-                ende und titel gleich wie bei 'termin' sind, wenn ja return true */
-        return false;
+    public void removeTerminByID(int id){
+        terminkalender.remove(getTerminByID(id));
     }
+    
 }

@@ -125,7 +125,34 @@ public class Benutzer {
         kontaktliste.remove(username);
     }
 
+    /**
+     * 
+     * @param datum
+     * @param beginn
+     * @param ende
+     * @param titel
+     * @throws TerminException 
+     */
     public void addTermin(Datum datum, Zeit beginn, Zeit ende, String titel) throws TerminException{
         terminkalender.addTermin(datum, beginn, ende, titel, username);
+    }
+    
+    /**
+     * 
+     * @param termin
+     * @param absender 
+     */
+    public void addAnfrage(Termin termin, String absender){
+        terminanfragen.add(new Anfrage(termin, absender));
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public Anfrage getNextAnfrage(){
+        Anfrage result = terminanfragen.getFirst();
+        terminanfragen.removeFirst();
+        return result;
     }
 }

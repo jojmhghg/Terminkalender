@@ -10,5 +10,11 @@ package server;
  * @author Tim Meyer
  */
 class Anfrage {
+    Termin termin;
+    String absender;
     
+    Anfrage(Termin termin, String absender){
+        this.termin = termin;
+        this.absender = absender;
+    }
 }

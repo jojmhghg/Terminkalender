@@ -46,4 +46,23 @@ public class BenutzerListe {
         return result;
     }
     
+    /**
+     * 
+     * @param username
+     * @return 
+     * @throws server.BenutzerException 
+     */
+    public Benutzer getBenutzer(String username) throws BenutzerException{
+        Benutzer result = null;        
+        if(!existiertBenutzer(username)){
+            throw new BenutzerException(username + " existiert nicht!");
+        }
+        for(Benutzer benutzer : benutzerliste){
+            if(benutzer.getUsername().equals(username)){
+                result = benutzer;
+            }
+        }
+        return result;
+    }
+    
 }

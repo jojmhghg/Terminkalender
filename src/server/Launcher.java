@@ -55,6 +55,20 @@ public class Launcher implements LauncherInterface{
     }
     
     /**
+     * 
+     * @param termin
+     * @throws BenutzerException
+     * @throws TerminException 
+     */
+    @Override
+    public void addTermin(Termin termin) throws BenutzerException, TerminException{
+        if(!eingeloggt){
+            throw new BenutzerException("noch nicht eingeloggt");
+        }
+        eingeloggterBenutzer.getTerminkalender().addTermin(termin);
+    }
+    
+    /**
      * fügt dem eingeloggten Benutzer den Termin mit den übergebenen Parametern hinzu
      * 
      * @param datum
@@ -91,13 +105,14 @@ public class Launcher implements LauncherInterface{
      * @param id
      * @param neuesDatum
      * @throws BenutzerException 
+     * @throws TerminException 
      */
     @Override
-    public void changeTermindatum(int id, Datum neuesDatum) throws BenutzerException{
+    public void changeTermindatum(int id, Datum neuesDatum) throws BenutzerException, TerminException{
         if(!eingeloggt){
             throw new BenutzerException("noch nicht eingeloggt");
         }
-        eingeloggterBenutzer.getTerminkalender().getTerminByID(id).setDatum(neuesDatum);
+        eingeloggterBenutzer.getTerminkalender().getTerminByID(id).setDatum(neuesDatum, eingeloggterBenutzer.getUsername());
     }
     
     /**
@@ -112,7 +127,7 @@ public class Launcher implements LauncherInterface{
         if(!eingeloggt){
             throw new BenutzerException("noch nicht eingeloggt");
         }
-        eingeloggterBenutzer.getTerminkalender().getTerminByID(id).setBeginn(neuerBeginn);
+        eingeloggterBenutzer.getTerminkalender().getTerminByID(id).setBeginn(neuerBeginn, eingeloggterBenutzer.getUsername());
     }
     
     /**
@@ -120,14 +135,14 @@ public class Launcher implements LauncherInterface{
      * @param id
      * @param neuesEnde
      * @throws BenutzerException 
-     * @throws server.TerminException 
+     * @throws TerminException 
      */
     @Override
     public void changeTerminende(int id, Zeit neuesEnde) throws BenutzerException, TerminException{
         if(!eingeloggt){
             throw new BenutzerException("noch nicht eingeloggt");
         }
-        eingeloggterBenutzer.getTerminkalender().getTerminByID(id).setEnde(neuesEnde);
+        eingeloggterBenutzer.getTerminkalender().getTerminByID(id).setEnde(neuesEnde, eingeloggterBenutzer.getUsername());
     }
     
     /**
@@ -135,13 +150,14 @@ public class Launcher implements LauncherInterface{
      * @param id
      * @param neueNotiz
      * @throws BenutzerException 
+     * @throws TerminException 
      */
     @Override
-    public void changeTerminnotiz(int id, String neueNotiz) throws BenutzerException{
+    public void changeTerminnotiz(int id, String neueNotiz) throws BenutzerException, TerminException{
         if(!eingeloggt){
             throw new BenutzerException("noch nicht eingeloggt");
         }
-        eingeloggterBenutzer.getTerminkalender().getTerminByID(id).setNotiz(neueNotiz);
+        eingeloggterBenutzer.getTerminkalender().getTerminByID(id).setNotiz(neueNotiz, eingeloggterBenutzer.getUsername());
     }
     
     /**
@@ -149,13 +165,14 @@ public class Launcher implements LauncherInterface{
      * @param id
      * @param neuerTitel
      * @throws BenutzerException 
+     * @throws TerminException 
      */
     @Override
-    public void changeTermintitel(int id, String neuerTitel) throws BenutzerException{
+    public void changeTermintitel(int id, String neuerTitel) throws BenutzerException, TerminException{
         if(!eingeloggt){
             throw new BenutzerException("noch nicht eingeloggt");
         }
-        eingeloggterBenutzer.getTerminkalender().getTerminByID(id).setTitel(neuerTitel);
+        eingeloggterBenutzer.getTerminkalender().getTerminByID(id).setTitel(neuerTitel, eingeloggterBenutzer.getUsername());
     }
     
     /**
@@ -163,13 +180,14 @@ public class Launcher implements LauncherInterface{
      * @param id
      * @param neuerOrt
      * @throws BenutzerException 
+     * @throws TerminException 
      */
     @Override
-    public void changeTerminort(int id, String neuerOrt) throws BenutzerException{
+    public void changeTerminort(int id, String neuerOrt) throws BenutzerException, TerminException{
         if(!eingeloggt){
             throw new BenutzerException("noch nicht eingeloggt");
         }
-        eingeloggterBenutzer.getTerminkalender().getTerminByID(id).setOrt(neuerOrt);
+        eingeloggterBenutzer.getTerminkalender().getTerminByID(id).setOrt(neuerOrt, eingeloggterBenutzer.getUsername());
     }
     
     /**
@@ -187,6 +205,42 @@ public class Launcher implements LauncherInterface{
             throw new BenutzerException("Benutzer: " + username + " exisitert nicht!");
         }
         eingeloggterBenutzer.getTerminkalender().getTerminByID(id).addTeilnehmer(username);
+        benutzerliste.getBenutzer(username).addAnfrage(eingeloggterBenutzer.getTerminkalender().getTerminByID(id), username);
+    }
+    
+    /**
+     * 
+     * @param username
+     * @param id
+     * @param termin
+     * @throws TerminException
+     * @throws BenutzerException 
+     */
+    @Override
+    public void terminAnnehmen(String username, int id, Termin termin) throws TerminException, BenutzerException{
+        if(!eingeloggt){
+            throw new BenutzerException("noch nicht eingeloggt");
+        }
+        eingeloggterBenutzer.getTerminkalender().addTermin(termin);
+        benutzerliste.getBenutzer(username).getTerminkalender().getTerminByID(id).changeTeilnehmerNimmtTeil(username);
+        //TODO: benutzerliste.getBenutzer(username) eine Meldung schicken, dass eingeloggterBenutzer teilnimmt!
+    }
+    
+    /**
+     * 
+     * @param username
+     * @param id
+     * @param termin
+     * @throws TerminException
+     * @throws BenutzerException 
+     */
+    @Override
+    public void terminAblehnen(String username, int id, Termin termin) throws TerminException, BenutzerException{
+        if(!eingeloggt){
+            throw new BenutzerException("noch nicht eingeloggt");
+        }
+        benutzerliste.getBenutzer(username).getTerminkalender().getTerminByID(id).removeTeilnehmer(username);
+        //TODO: benutzerliste.getBenutzer(username) eine Meldung schicken, dass eingeloggterBenutzer nicht teilnimmt!
     }
     
     /**
@@ -368,6 +422,21 @@ public class Launcher implements LauncherInterface{
         return eingeloggterBenutzer.getTerminkalender().getTermineImMonat(monat, jahr);
     }
     
+    /**
+     * 
+     * @param editierbar
+     * @param id
+     * @throws TerminException 
+     * @throws server.BenutzerException 
+     */
+    @Override
+    public void changeEditierrechte(boolean editierbar, int id) throws TerminException, BenutzerException{
+        if(!eingeloggt){
+            throw new BenutzerException("noch nicht eingeloggt");
+        }
+        eingeloggterBenutzer.getTerminkalender().getTerminByID(id).setEditierbar(editierbar, eingeloggterBenutzer.getUsername());
+    }
+
     /**
      * Hilfsmethode um Benutzerliste zu füllen
      * 

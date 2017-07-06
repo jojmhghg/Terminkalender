@@ -23,8 +23,11 @@ public class Termin {
     private String notiz;
     private String ort;
     private LinkedList<Teilnehmer>teilnehmer;
+    /* Rechte für Verwaltung: */
+    private final String owner;
+    private boolean editierbar;
       
-    Termin(Datum datum, Zeit beginn, Zeit ende, String titel, int id) throws TerminException{
+    Termin(Datum datum, Zeit beginn, Zeit ende, String titel, int id, String username) throws TerminException{
         if(!anfangVorEnde(beginn, ende)){
             throw new TerminException("Startzeitpunkt darf nicht nach dem Endzeitpunkt liegen!");
         }
@@ -37,6 +40,9 @@ public class Termin {
         this.notiz = "";
         this.ort = "";
         this.teilnehmer = new LinkedList<>();
+        this.teilnehmer.add(new Teilnehmer(username));
+        this.owner = username;
+        this.editierbar = true;
     }
        
     /**
@@ -50,6 +56,12 @@ public class Termin {
     }
     
     //Getter 
+    public boolean getEditierbar(){
+        return editierbar;
+    }
+    public String getOwner(){
+        return owner;
+    }
     public int getID(){
         return id;
     }
@@ -76,29 +88,88 @@ public class Termin {
     }
     
     // Setter
-    public void setNotiz(String notiz){
+    public void setEditierbar(boolean editierbar, String username) throws TerminException{
+        if(!username.equals(this.owner)){
+            throw new TerminException("Nur der Ersteller des Termins kann die Rechte aendern!");
+        }
+        this.editierbar = editierbar;
+    }
+    public void setNotiz(String notiz, String username) throws TerminException{
+        if(!username.equals(this.owner)){
+            throw new TerminException("Nur der Ersteller des Termins kann die Rechte aendern!");
+        }
         this.notiz = notiz;
     }   
-    public void setOrt(String ort){
+    public void setOrt(String ort, String username) throws TerminException{
+        if(!username.equals(this.owner)){
+            throw new TerminException("Nur der Ersteller des Termins kann die Rechte aendern!");
+        }
         this.ort = ort;
     }
-    public void setTitel(String neuerTitel){
+    public void setTitel(String neuerTitel, String username) throws TerminException{
+        if(!username.equals(this.owner)){
+            throw new TerminException("Nur der Ersteller des Termins kann die Rechte aendern!");
+        }
         titel = neuerTitel;
     }
-    public void setBeginn(Zeit neuerBeginn) throws TerminException{
+    public void setBeginn(Zeit neuerBeginn, String username) throws TerminException{
+        if(!username.equals(this.owner)){
+            throw new TerminException("Nur der Ersteller des Termins kann die Rechte aendern!");
+        }
         if(!anfangVorEnde(neuerBeginn, ende)){
             throw new TerminException("Startzeitpunkt darf nicht nach dem Endzeitpunkt liegen!");
         }
         beginn = neuerBeginn;
     }
-    public void setEnde(Zeit neuesEnde) throws TerminException{
+    public void setEnde(Zeit neuesEnde, String username) throws TerminException{
+        if(!username.equals(this.owner)){
+            throw new TerminException("Nur der Ersteller des Termins kann die Rechte aendern!");
+        }
         if(!anfangVorEnde(beginn, neuesEnde)){
             throw new TerminException("Startzeitpunkt darf nicht nach dem Endzeitpunkt liegen!");
         }
         ende = neuesEnde;
     }
-    public void setDatum(Datum neuesDatum){
+    public void setDatum(Datum neuesDatum, String username) throws TerminException{
+        if(!username.equals(this.owner)){
+            throw new TerminException("Nur der Ersteller des Termins kann die Rechte aendern!");
+        }
         datum = neuesDatum;
+    }
+    
+    /**
+     * 
+     * @param username 
+     * @throws server.TerminException 
+     */
+    public void changeTeilnehmerNimmtTeil(String username) throws TerminException{
+        boolean error = true;
+        for(Teilnehmer tl : teilnehmer){
+            if(tl.getUsername().equals(username)){
+                tl.setIstTeilnemer();
+                error = false;
+            }
+        }
+        if(error){
+            throw new TerminException(username + " nicht in der Teilnehmerliste vorhanden");
+        }
+    }
+    
+    /**
+     * 
+     * @param username
+     * @throws TerminException 
+     */
+    public void removeTeilnehmer(String username) throws TerminException{
+        boolean error = true;
+        for(Teilnehmer tl : teilnehmer){
+            if(tl.getUsername().equals(username)){
+                teilnehmer.remove(tl);
+            }
+        }
+        if(error){
+            throw new TerminException(username + " nicht in der Teilnehmerliste vorhanden");
+        }
     }
     
     /**

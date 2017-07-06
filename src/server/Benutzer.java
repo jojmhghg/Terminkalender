@@ -6,6 +6,8 @@
 package server;
 
 import java.util.LinkedList;
+import server.hilfsklassen.Datum;
+import server.hilfsklassen.Zeit;
 
 /**
  *
@@ -121,5 +123,9 @@ public class Benutzer {
     public void removeKontakt(String username){
         //TODO: teste ob username in kontaktliste, wenn nein: werfe Fehler
         kontaktliste.remove(username);
+    }
+
+    public void addTermin(Datum datum, Zeit beginn, Zeit ende, String titel) throws TerminException{
+        terminkalender.addTermin(datum, beginn, ende, titel, username);
     }
 }

@@ -28,9 +28,22 @@ public class BenutzerListe {
      * @throws server.BenutzerException 
      */
     public void addBenutzer(String username, String passwort, String email) throws BenutzerException{
-        //TODO: teste ob username in benutzerliste vorhanden ist, wenn ja: werfe Fehler
+        if(existiertBenutzer(username)){
+            //TODO: teste ob username in benutzerliste vorhanden ist, wenn ja: werfe Fehler
+        }
         //TODO: teste ob email in benutzerliste vorhanden ist, wenn ja: werfe Fehler
         benutzerliste.add(new Benutzer(username, passwort, email));
+    }
+    
+    public boolean existiertBenutzer(String username){
+        boolean result = false;
+        for(Benutzer benutzer : benutzerliste){
+            if(benutzer.getUsername().equals(username)){
+                result = true;
+            }
+        }
+        
+        return result;
     }
     
 }

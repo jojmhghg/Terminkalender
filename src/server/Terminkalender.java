@@ -41,10 +41,12 @@ public class Terminkalender {
      * @param beginn
      * @param ende
      * @param titel
+     * @param username
      * @throws TerminException 
      */
-    public void addTermin(Datum datum, Zeit beginn, Zeit ende, String titel) throws TerminException{
+    public void addTermin(Datum datum, Zeit beginn, Zeit ende, String titel, String username) throws TerminException{
         terminkalender.add(new Termin(datum, beginn, ende, titel, idCounter));
+        terminkalender.getLast().addTeilnehmer(username);
         idCounter++;
     }
     

@@ -44,7 +44,7 @@ public class Termin {
         this.owner = username;
         this.editierbar = true;
     }
-       
+
     /**
      * fügt der Teilnehmerliste 'teilnehmer' den Teilnehmer 'usename' hinzu
      * 

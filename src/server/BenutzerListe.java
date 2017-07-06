@@ -47,19 +47,22 @@ public class BenutzerListe {
     }
     
     /**
-     * Testet ob als Argument übergebener username bereits existiert
      * 
      * @param username
      * @return 
+     * @throws server.BenutzerException 
      */
-    public boolean usernameAlreadyUsed(String username) {
-        
-        //TODO: impl. einer Funktion um zu schauen ob username schon existiert
-        try{
-            return username.equals(getBenutzer(username).getUsername());
-        }catch (BenutzerException e){
-            return false;
+    public Benutzer getBenutzer(String username) throws BenutzerException{
+        Benutzer result = null;        
+        if(!existiertBenutzer(username)){
+            throw new BenutzerException(username + " existiert nicht!");
         }
+        for(Benutzer benutzer : benutzerliste){
+            if(benutzer.getUsername().equals(username)){
+                result = benutzer;
+            }
+        }
+        return result;
     }
     
 }

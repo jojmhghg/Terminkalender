@@ -10,11 +10,19 @@ package server;
  * @author Tim Meyer
  */
 class Anfrage {
-    Termin termin;
-    String absender;
+    private final Termin termin;
+    private final String absender;
     
     Anfrage(Termin termin, String absender){
         this.termin = termin;
         this.absender = absender;
+    }
+    
+    public Termin getTermin(){
+        return termin;
+    }
+    
+    public String getAbsender(){
+        return absender;
     }
 }

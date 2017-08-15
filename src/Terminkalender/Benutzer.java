@@ -3,19 +3,16 @@
  * implementieren
  * 
  */
-package Server;
+package Terminkalender;
 
-import Hilfsklassen.BenutzerException;
-import Hilfsklassen.TerminException;
 import java.util.LinkedList;
-import Hilfsklassen.Datum;
-import Hilfsklassen.Zeit;
+import java.io.Serializable;
 
 /**
  *
  * @author Tim Meyer
  */
-public class Benutzer {
+public class Benutzer implements Serializable{
     
     private final String username;
     private String vorname;
@@ -158,9 +155,5 @@ public class Benutzer {
         return result;
     }
 }
-
-    /*private boolean usernameAlreadyUsed(String username) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
     
 

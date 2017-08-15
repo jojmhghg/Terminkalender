@@ -3,18 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Server;
+package Terminkalender;
 
-import Hilfsklassen.TerminException;
-import Hilfsklassen.Zeit;
-import Hilfsklassen.Datum;
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
  * 
  * @author Tim Meyer
  */
-public class Termin {   
+public class Termin implements Serializable{   
     
     private final int id;
     private Datum datum;

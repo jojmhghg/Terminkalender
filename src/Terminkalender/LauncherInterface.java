@@ -1,17 +1,14 @@
+package Terminkalender;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Server;
 
-import Hilfsklassen.BenutzerException;
-import Hilfsklassen.TerminException;
 import java.rmi.*;
 import java.util.LinkedList;
-import Hilfsklassen.Datum;
-import Hilfsklassen.Monat;
-import Hilfsklassen.Zeit;
+
 
 /**
  *
@@ -20,7 +17,7 @@ import Hilfsklassen.Zeit;
 public interface LauncherInterface extends Remote{
     /* initiale Methoden */
     public void createUser(String username, String passwort, String email) throws RemoteException, BenutzerException;
-    public void einloggen(String username, String passwort) throws RemoteException, BenutzerException;
+    public boolean einloggen(String username, String passwort) throws RemoteException;
     public void ausloggen() throws RemoteException;
     
     /* alles zu der Kontaktliste */

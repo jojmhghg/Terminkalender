@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Server;
+package Terminkalender;
+
+import java.io.Serializable;
 
 /**
  *
  * @author Tim Meyer
  */
-class Teilnehmer {
+class Teilnehmer implements Serializable{
     
     private final String username;
     private boolean nimmtTeil;

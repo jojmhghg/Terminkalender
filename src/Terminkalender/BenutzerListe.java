@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Server;
+package Terminkalender;
 
-import Hilfsklassen.BenutzerException;
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
  *
  * @author Tim Meyer
  */
-public class BenutzerListe {
+public class BenutzerListe implements Serializable{
     
     private final LinkedList<Benutzer> benutzerliste;
     
@@ -26,11 +26,11 @@ public class BenutzerListe {
      * @param username
      * @param passwort
      * @param email
-     * @throws Server.BenutzerException 
+     * @throws Terminkalender.BenutzerException
      */
     public void addBenutzer(String username, String passwort, String email) throws BenutzerException{
         if(existiertBenutzer(username)){
-            //TODO: teste ob username in benutzerliste vorhanden ist, wenn ja: werfe Fehler
+            throw new BenutzerException(username + " existiert bereits!");
         }
         //TODO: teste ob email in benutzerliste vorhanden ist, wenn ja: werfe Fehler
         benutzerliste.add(new Benutzer(username, passwort, email));

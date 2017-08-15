@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Hilfsklassen;
+package Terminkalender;
 
 /**
  *
  * @author Tim Meyer
  */
-public class BenutzerException extends Exception {
+public class TerminException extends Exception {
 
     private final String message;
         
-    public BenutzerException(String message) {
-        this.message = message;
+    public TerminException(String message) {
+       this.message = message;
     }
         
     @Override

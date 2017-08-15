@@ -3,14 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Server;
+package Terminkalender;
 
-import Hilfsklassen.BenutzerException;
-import Hilfsklassen.TerminException;
 import java.util.LinkedList;
-import Hilfsklassen.Datum;
-import Hilfsklassen.Monat;
-import Hilfsklassen.Zeit;
 
 /**
  *
@@ -22,7 +17,7 @@ public class Launcher implements LauncherInterface{
     private Benutzer eingeloggterBenutzer;
     private boolean eingeloggt;
     
-    Launcher(){
+    public Launcher(){
         ladeBenutzerliste();
         eingeloggt = false;
     }
@@ -53,16 +48,23 @@ public class Launcher implements LauncherInterface{
      * dieser nicht vorhanden ist
      * 
      * @param username
-     * @param passwort
-     * @throws BenutzerException 
+     * @param passwort 
+     * @return  
      */
     @Override
-    public void einloggen(String username, String passwort) throws BenutzerException{
-        Benutzer gesuchterBenutzer = null;
-        //TODO: teste ob username in benutzerliste, wenn nein: werfe Fehler, wenn ja: gesuchterBenutzer = gefundener Benutzer aus der Liste
-        //TODO: teste ob passwort mit dem passwort des benutzers aus der Liste übereinstimmt, wenn nein: werfe Fehler
-        eingeloggterBenutzer = gesuchterBenutzer;
-        eingeloggt = true;
+    public boolean einloggen(String username, String passwort){
+        try {
+            if(benutzerliste.getBenutzer(username).istPasswort(passwort)){
+                eingeloggterBenutzer = benutzerliste.getBenutzer(username);
+                eingeloggt = true;
+                return true;
+            }
+            else{
+                return false;
+            }
+        } catch (BenutzerException e) {
+            return false;
+        }
     }
     
     /**
@@ -313,7 +315,7 @@ public class Launcher implements LauncherInterface{
     /**
      * 
      * @param username 
-     * @throws Hilfsklassen.BenutzerException 
+     * @throws Terminkalender.BenutzerException 
      */
     @Override
     public void addKontakt(String username) throws BenutzerException{
@@ -438,7 +440,7 @@ public class Launcher implements LauncherInterface{
      * @param editierbar
      * @param id
      * @throws TerminException 
-     * @throws Hilfsklassen.BenutzerException 
+     * @throws Terminkalender.BenutzerException 
      */
     @Override
     public void changeEditierrechte(boolean editierbar, int id) throws TerminException, BenutzerException{
@@ -454,5 +456,6 @@ public class Launcher implements LauncherInterface{
      */
     private void ladeBenutzerliste() {
         //TODO: hier wird die Benutzerliste mit den Daten aus der DB gefüllt
+        benutzerliste = new BenutzerListe();
     }
 }
